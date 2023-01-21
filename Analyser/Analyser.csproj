@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <PackageId>Lucene.JIEba.Analyzer</PackageId>
     <PackageVersion>1.0.0</PackageVersion>
     <Authors>SilentCC</Authors>
