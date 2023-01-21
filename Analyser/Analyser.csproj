@@ -9,7 +9,6 @@
     <PackageProjectUrl>https://github.com/SilentCC/JIEba-netcore2.0/</PackageProjectUrl>
     <Copyright>Copyright 2019 (c) AgileLabs. All rights reserved.</Copyright>
     <PackageTags>Analyzer Segment JIEba.net core2.0</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
