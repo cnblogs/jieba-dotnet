@@ -11,14 +11,12 @@ namespace jieba.NET
 {
     public class JieBaTokenizer : Tokenizer
     {
+        private static readonly Stopwords _stopwords = Stopwords.Instance;
         private string _inputText;
         private int _start;
-
-        private readonly string _stropWordsPath = "Resources/stopwords.txt";
         private readonly JiebaSegmenter _segmenter;
         private readonly TokenizerMode _mode;
         private readonly bool _skipStopwords;
-        private readonly Dictionary<string, int> _stopWords = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         private readonly List<JiebaNet.Segmenter.Token> _wordList = new List<JiebaNet.Segmenter.Token>();
 
         private ICharTermAttribute _termAtt;
@@ -33,32 +31,10 @@ namespace jieba.NET
             _segmenter = new JiebaSegmenter();
             _mode = Mode;
             _skipStopwords = skipStopwords;
-            LoadStopWords();
             Init();
         }
 
-        public Dictionary<string, int> StopWords
-        {
-            get => _stopWords;
-        }
-
-        private void LoadStopWords()
-        {
-            var fileProvider = new EmbeddedFileProvider(GetType().GetTypeInfo().Assembly);
-            var fileInfo = fileProvider.GetFileInfo(_stropWordsPath);
-
-            using var reader = new StreamReader(fileInfo.CreateReadStream());
-            var s = "";
-            while ((s = reader.ReadLine()) != null)
-            {
-                s = s.Trim();
-                if (string.IsNullOrWhiteSpace(s))
-                    continue;
-                if (_stopWords.ContainsKey(s))
-                    continue;
-                _stopWords.Add(s, 1);
-            }
-        }
+        public static IDictionary<string, bool> StopWords => _stopwords.Dictionary;
 
         private void Init()
         {
@@ -123,7 +99,7 @@ namespace jieba.NET
 
             foreach (var x in words)
             {
-                if (_skipStopwords || !_stopWords.ContainsKey(x.Word))
+                if (_skipStopwords || !_stopwords.Dictionary.ContainsKey(x.Word))
                 {
                     _wordList.Add(x);
                 }

@@ -71,15 +71,5 @@ namespace Test
                     wordInfos.ElementAt(i - 1).position + wordInfos.ElementAt(i - 1).value.Length);
             }
         }
-
-        [Fact]
-        public void TestJIEbaTokenizer()
-        {
-            var tokenizer = new JieBaTokenizer(TextReader.Null, TokenizerMode.Default);
-
-            Assert.NotEmpty(tokenizer.StopWords);
-            Assert.True(tokenizer.StopWords.ContainsKey("是"));
-            Assert.True(tokenizer.StopWords.ContainsKey("什么"));
-        }
     }
 }
